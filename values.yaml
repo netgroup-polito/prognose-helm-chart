@@ -2,8 +2,8 @@ app: prognose
 be:
   replicaCount: 1
   image:
-    repository: docker.io/g420/prognose-backend
-    tag: 1.9.5-postgres # Specify desired backend image version (https://hub.docker.com/repository/docker/g420/resource-management-backend/general)
+    repository: docker.io/prognosepolito/prognose-backend
+    tag: 1.9.5-postgres # Specify desired backend image version
   containerPort: 8080
   config:
     # If using PostgreSQL, use the -postgresql image
@@ -37,8 +37,8 @@ be:
 fe:
   replicaCount: 1
   image:
-    repository: docker.io/g420/prognose-frontend
-    tag: 1.5.11 # Specify desired frontend image version (https://hub.docker.com/repository/docker/g420/resource-management-frontend/general)
+    repository: docker.io/prognosepolito/prognose-frontend
+    tag: 1.5.11
   config:
     keycloakClientId: prognose-fe
   ingress:
@@ -57,8 +57,8 @@ fe:
 eventProcessor:
   replicaCount: 1
   image:
-    repository: docker.io/g420/reservation-event-processor
-    tag: 0.1.18-postgres # Specify desired backend image version (https://hub.docker.com/repository/docker/g420/reservation-event-processor/general) 
+    repository: docker.io/prognosepolito/reservation-event-processor
+    tag: 0.1.18-postgres
   containerPort: 8080
   config:
     keycloakClientId: prognose-app
