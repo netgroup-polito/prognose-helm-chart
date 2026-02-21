@@ -8,7 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production
     nginx.ingress.kubernetes.io/custom-http-errors: "418"
 spec:
-  ingressClassName: nginx-external
+  ingressClassName: {{ .Values.fe.ingress.ingressClassName | default "nginx" }}
   rules:
     - host: {{ .Values.be.ingress.host }}
       http:
