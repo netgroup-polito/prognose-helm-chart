@@ -5,9 +5,11 @@ metadata:
   labels:
     {{- include "prognose.labels" (dict "context" . "component" "frontend") | nindent 4 }}
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-production
+    # Questa riga è fondamentale per evitare il redirect automatico su HTTPS
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    # Ho rimosso l'annotazione di cert-manager perché in DEV non serve
 spec:
-  ingressClassName: {{ .Values.be.ingress.ingressClassName | default "nginx" }}
+  ingressClassName: {{ .Values.fe.ingress.ingressClassName | default "nginx" }}
   rules:
     - host: {{ .Values.fe.ingress.host }}
       http:
@@ -19,7 +21,4 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
-  tls:
-    - hosts:
-        - {{ .Values.fe.ingress.host }}
-      secretName: prognose-fe-ingress-tls
+  # La sezione TLS è stata rimossa completamente
