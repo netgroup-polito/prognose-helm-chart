@@ -5,10 +5,13 @@ metadata:
   labels:
     {{- include "prognose.labels" (dict "context" . "component" "backend") | nindent 4 }}
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-production
+    # Fondamentale per evitare il redirect su HTTPS (e il CONNECTION_REFUSED)
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    # Manteniamo l'errore 418 (I'm a teapot) che avevi già
     nginx.ingress.kubernetes.io/custom-http-errors: "418"
 spec:
-  ingressClassName: {{ .Values.fe.ingress.ingressClassName | default "nginx" }}
+  # Ho corretto il puntamento a be.ingress per coerenza con il file
+  ingressClassName: {{ .Values.be.ingress.ingressClassName | default "nginx" }}
   rules:
     - host: {{ .Values.be.ingress.host }}
       http:
@@ -20,7 +23,4 @@ spec:
                   number: {{ .Values.be.containerPort }}
             path: {{ .Values.be.ingress.path }}
             pathType: Prefix
-  tls:
-    - hosts:
-        - {{ .Values.be.ingress.host }}
-      secretName: prognose-be-ingress-tls
+  # Sezione TLS rimossa completamente
