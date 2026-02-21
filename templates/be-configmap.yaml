@@ -18,4 +18,5 @@ data:
   KEYCLOAK_CLIENT_ID: {{ .Values.be.config.keycloakClientId | quote }}
   
   # CORS Configuration
-  FRONTEND_APP_URL: "http://{{ .Values.fe.ingress.host }}/"
+  # ATTENZIONE: Qui aggiungiamo http e la porta :30438 per l'ambiente dev
+  FRONTEND_APP_URL: "http://{{ .Values.fe.ingress.host }}:30438/"
