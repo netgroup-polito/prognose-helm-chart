@@ -1,14 +1,15 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-fe-config # Corrected name templating
+  name: {{ .Release.Name }}-fe-config
   labels:
     {{- include "prognose.labels" (dict "context" . "component" "frontend") | nindent 4 }}
 data:
   {{- if .Values.fe.config.apiUrl }}
   REACT_APP_API_URL: {{ .Values.fe.config.apiUrl | quote }}
   {{- else }}
-  REACT_APP_API_URL: "https://{{ .Values.be.ingress.host }}{{ .Values.be.ingress.path }}"
+  # CORRETTO: Usiamo http e la porta 30438 per le chiamate API
+  REACT_APP_API_URL: "http://{{ .Values.be.ingress.host }}:30438{{ .Values.be.ingress.path }}"
   {{- end }}
   REACT_APP_KEYCLOAK_URL: {{ .Values.be.config.keycloakAuthServerUrl | quote }}
   REACT_APP_KEYCLOAK_REALM: {{ .Values.be.config.keycloakRealm | quote }}
