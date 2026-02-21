@@ -9,7 +9,7 @@ data:
   SERVER_PORT: {{ .Values.be.containerPort | quote }}
   
   # Database Configuration
-  DB_TYPE: {{ .Values.be.config.databaseType | quote }}
+  DB_TYPE: {{ .Values.be.config.databaseType | default "postgres" | quote }}
   DB_URL: {{ include "prognose.database.url" . }}
   
   # Keycloak Configuration  
