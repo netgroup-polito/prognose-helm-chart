@@ -5,7 +5,11 @@ metadata:
   labels:
     {{- include "prognose.labels" (dict "context" . "component" "frontend") | nindent 4 }}
 data:
+  {{- if .Values.fe.config.apiUrl }}
+  REACT_APP_API_URL: {{ .Values.fe.config.apiUrl | quote }}
+  {{- else }}
   REACT_APP_API_URL: "https://{{ .Values.be.ingress.host }}{{ .Values.be.ingress.path }}"
+  {{- end }}
   REACT_APP_KEYCLOAK_URL: {{ .Values.be.config.keycloakAuthServerUrl | quote }}
   REACT_APP_KEYCLOAK_REALM: {{ .Values.be.config.keycloakRealm | quote }}
   REACT_APP_KEYCLOAK_CLIENT_ID: {{ .Values.fe.config.keycloakClientId | quote }}
