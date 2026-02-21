@@ -7,7 +7,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
-  ingressClassName: nginx-external
+  ingressClassName: {{ .Values.be.ingress.ingressClassName | default "nginx" }}
   rules:
     - host: {{ .Values.fe.ingress.host }}
       http:
