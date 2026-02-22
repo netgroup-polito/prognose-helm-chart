@@ -38,7 +38,7 @@ fe:
   replicaCount: 1
   image:
     repository: docker.io/prognosepolito/prognose-frontend
-    tag: 1.5.11
+    tag: 1.5.12-dev
   config:
     keycloakClientId: prognose-fe
   ingress:
