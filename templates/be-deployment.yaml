@@ -14,6 +14,10 @@ spec:
       labels:
         {{- include "prognose.selectorLabels" (dict "context" . "component" "backend") | nindent 8 }}
     spec:
+      hostAliases:
+      - ip: "192.168.11.24"
+        hostnames:
+        - "keycloak.192.168.11.24.nip.io"
       containers:
         - name: backend
           image: "{{ .Values.be.image.repository }}:{{ .Values.be.image.tag }}"
