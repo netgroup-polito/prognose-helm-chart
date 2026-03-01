@@ -3,7 +3,7 @@ be:
   replicaCount: 1
   image:
     repository: docker.io/prognosepolito/prognose-backend
-    tag: 1.9.11-dev-postgres # Specify desired backend image version
+    tag: 1.9.12-dev-postgres # Specify desired backend image version
   containerPort: 8080
   config:
     # If using PostgreSQL, use the -postgresql image
@@ -60,7 +60,7 @@ eventProcessor:
   replicaCount: 1
   image:
     repository: docker.io/prognosepolito/reservation-event-processor
-    tag: 0.1.20-dev-postgres
+    tag: 0.1.21-dev-postgres
   containerPort: 8080
   config:
     keycloakClientId: prognose-app
