@@ -58,7 +58,7 @@ eventProcessor:
   replicaCount: 1
   image:
     repository: docker.io/prognosepolito/reservation-event-processor
-    tag: 0.1.21-dev-postgres
+    tag: 0.1.20-postgres
   containerPort: 8080
   config:
     keycloakClientId: prognose-app
